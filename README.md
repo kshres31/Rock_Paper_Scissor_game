@@ -9,7 +9,9 @@ A terminal-based Rock Paper Scissors game written in Python. Play against the co
 - Input validation (accepts words, numbers 1-3, and shorthand R/P/S)
 - Case-insensitive and whitespace-tolerant input
 - Score tracking across multiple rounds
-- Win percentage in final summary
+- Win streak tracking with fire emoji at 3+ wins
+- Win percentage and best streak in final summary
+- In-game rules display (? key)
 - Clean terminal UI
 - Replay support — play as many rounds as you want
 
@@ -36,6 +38,7 @@ python main.py
    - A word: `rock`, `paper`, or `scissors`
    - A shorthand letter: `R`, `P`, or `S`
    - `Q` to quit
+   - `?` to view rules
 3. The computer picks a random move
 4. The winner is displayed along with the current score
 5. Choose to play another round or quit
@@ -52,6 +55,7 @@ Choose your move:
   1. Rock
   2. Paper
   3. Scissors
+  ?. Rules
   Q. Quit
 
 Your choice: rock
