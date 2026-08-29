@@ -138,8 +138,8 @@ def play_round() -> tuple[str, str, str]:
     return (player_choice, computer_choice, result)
 
 
-def play_game():
-    """Run the full game loop."""
+def show_welcome():
+    """Print the welcome banner."""
     print(f"\n{DIVIDER}")
     print("ROCK PAPER SCISSORS".center(40))
     print(DIVIDER)
@@ -148,6 +148,11 @@ def play_game():
     print("  Scissors beats Paper")
     print("  Paper beats Rock")
     print("  Same choice = Draw")
+
+
+def play_game():
+    """Run the full game loop."""
+    show_welcome()
 
     wins = 0
     losses = 0
@@ -198,7 +203,10 @@ def play_game():
     if rounds_played > 0:
         show_final_score(wins, losses, draws, best_streak)
     else:
-        print("\nThanks for playing! Maybe next time.\n")
+        print("\nThanks for stopping by! Maybe next time.\n")
+
+    print("Goodbye! 👋")
+    print()
 
 
 # ── Entry point ──────────────────────────────────────────────────────
