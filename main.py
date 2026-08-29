@@ -5,7 +5,6 @@ Run this file to play the game in your terminal.
 """
 
 from game import (
-    CHOICES,
     get_computer_choice,
     normalize_input,
     determine_winner,
@@ -25,6 +24,7 @@ def show_menu():
     print("  2. Paper")
     print("  3. Scissors")
     print("  Q. Quit")
+    print("\n  (or type rock/paper/scissors)")
 
 
 def show_score(wins: int, losses: int, draws: int):
@@ -115,6 +115,11 @@ def play_game():
     print(f"\n{DIVIDER}")
     print("ROCK PAPER SCISSORS".center(40))
     print(DIVIDER)
+    print("\nRules:")
+    print("  Rock beats Scissors")
+    print("  Scissors beats Paper")
+    print("  Paper beats Rock")
+    print("  Same choice = Draw")
 
     wins = 0
     losses = 0
@@ -130,6 +135,7 @@ def play_game():
         rounds_played += 1
 
         # Display round outcome
+        print(f"\n--- Round {rounds_played} ---")
         print(f"\nYou chose:      {player_choice.capitalize()}")
         print(f"Computer chose: {computer_choice.capitalize()}\n")
 
