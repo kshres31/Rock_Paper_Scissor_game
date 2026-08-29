@@ -90,5 +90,6 @@ def describe_round(player: str, computer: str, result: str) -> str:
     winner_choice = player if result == "player" else computer
     loser_choice = computer if result == "player" else player
     winner_label = "You" if result == "player" else "Computer"
+    verb = "win" if result == "player" else "wins"
 
-    return f"{winner_choice.capitalize()} beats {loser_choice.capitalize()}!\n{winner_label} win{'s' if result == 'computer' else ''}!"
+    return f"{winner_choice.capitalize()} beats {loser_choice.capitalize()}!\n{winner_label} {verb}!"

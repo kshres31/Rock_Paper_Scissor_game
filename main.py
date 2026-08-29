@@ -17,12 +17,32 @@ DIVIDER = "=" * 40
 THIN_DIVIDER = "-" * 40
 
 
+def show_rules():
+    """Print the game rules."""
+    print(f"\n{DIVIDER}")
+    print("GAME RULES".center(40))
+    print(DIVIDER)
+    print()
+    print("  Rock beats Scissors")
+    print("  Scissors beats Paper")
+    print("  Paper beats Rock")
+    print("  Same choice = Draw")
+    print()
+    print("  Input options:")
+    print("    1/R = Rock")
+    print("    2/P = Paper")
+    print("    3/S = Scissors")
+    print("    Q   = Quit")
+    print()
+
+
 def show_menu():
     """Print the choice menu."""
     print("\nChoose your move:\n")
     print("  1. Rock")
     print("  2. Paper")
     print("  3. Scissors")
+    print("  ?. Rules")
     print("  Q. Quit")
     print("\n  (or type rock/paper/scissors)")
 
@@ -85,13 +105,18 @@ def get_player_choice() -> str | None:
     while True:
         show_menu()
         raw = input("\nYour choice: ")
-        normalized = normalize_input(raw)
+        value = raw.strip().lower()
 
+        if value in ("q", "quit", "exit"):
+            return None
+
+        if value in ("?", "rules", "help"):
+            show_rules()
+            continue
+
+        normalized = normalize_input(raw)
         if normalized is not None:
             return normalized
-
-        if raw.strip().lower() in ("q", "quit", "exit"):
-            return None
 
         print("\nInvalid choice. Please choose rock, paper, or scissors (1-3).")
 
