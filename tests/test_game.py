@@ -3,7 +3,7 @@ Tests for rock-paper-scissors game logic.
 """
 
 import unittest
-from game import normalize_input, determine_winner, get_computer_choice, CHOICES, BEATS
+from game import normalize_input, determine_winner, get_computer_choice, describe_round, CHOICES, BEATS
 
 
 class TestDetermineWinner(unittest.TestCase):
@@ -145,6 +145,28 @@ class TestComputerChoice(unittest.TestCase):
         for _ in range(500):
             seen.add(get_computer_choice())
         self.assertEqual(seen, set(CHOICES))
+
+
+class TestDescribeRound(unittest.TestCase):
+    """Test round description output."""
+
+    def test_player_win_message(self):
+        result = describe_round("rock", "scissors", "player")
+        self.assertIn("Rock beats Scissors", result)
+        self.assertIn("You win", result)
+
+    def test_computer_win_message(self):
+        result = describe_round("rock", "paper", "computer")
+        self.assertIn("Paper beats Rock", result)
+        self.assertIn("Computer wins", result)
+
+    def test_draw_message(self):
+        result = describe_round("paper", "paper", "draw")
+        self.assertIn("draw", result.lower())
+
+    def test_scissors_beats_paper(self):
+        result = describe_round("scissors", "paper", "player")
+        self.assertIn("Scissors beats Paper", result)
 
 
 class TestGameConsistency(unittest.TestCase):
