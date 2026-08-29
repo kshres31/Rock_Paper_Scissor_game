@@ -57,20 +57,23 @@ def show_score(wins: int, losses: int, draws: int):
     print(THIN_DIVIDER)
 
 
-def show_final_score(wins: int, losses: int, draws: int):
+def show_final_score(wins: int, losses: int, draws: int, best_streak: int = 0):
     """Print the final score summary."""
     total = wins + losses + draws
     print(f"\n{DIVIDER}")
     print("FINAL SCORE".center(40))
     print(DIVIDER)
-    print(f"\nYou:       {wins}")
-    print(f"Computer:  {losses}")
-    print(f"Draws:     {draws}")
-    print(f"Rounds:    {total}")
+    print(f"\nYou:           {wins}")
+    print(f"Computer:      {losses}")
+    print(f"Draws:         {draws}")
+    print(f"Rounds:        {total}")
 
     if total > 0:
         win_pct = (wins / total) * 100
-        print(f"Win rate:  {win_pct:.1f}%")
+        print(f"Win rate:      {win_pct:.1f}%")
+
+    if best_streak > 0:
+        print(f"Best streak:   {best_streak}")
 
     print()
 
@@ -150,6 +153,8 @@ def play_game():
     losses = 0
     draws = 0
     rounds_played = 0
+    streak = 0  # consecutive player wins
+    best_streak = 0
 
     while True:
         player_choice, computer_choice, result = play_round()
@@ -170,10 +175,18 @@ def play_game():
         # Update scores
         if result == "player":
             wins += 1
+            streak += 1
+            if streak > best_streak:
+                best_streak = streak
         elif result == "computer":
             losses += 1
+            streak = 0
         else:
             draws += 1
+            streak = 0
+
+        if streak >= 3:
+            print(f"\n  🔥 {streak}-win streak!")
 
         show_score(wins, losses, draws)
 
@@ -183,7 +196,7 @@ def play_game():
 
     # Show final results if at least one round was played
     if rounds_played > 0:
-        show_final_score(wins, losses, draws)
+        show_final_score(wins, losses, draws, best_streak)
     else:
         print("\nThanks for playing! Maybe next time.\n")
 
