@@ -90,7 +90,10 @@ def show_final_score(wins: int, losses: int, draws: int, best_streak: int = 0):
 def ask_play_again() -> bool:
     """Ask the player if they want to play again. Returns True for yes."""
     while True:
-        answer = input("\nPlay another round? (y/n): ").strip().lower()
+        try:
+            answer = input("\nPlay another round? (y/n): ").strip().lower()
+        except EOFError:
+            return False
         if answer in ("y", "yes"):
             return True
         if answer in ("n", "no"):
@@ -107,7 +110,10 @@ def get_player_choice() -> str | None:
     """
     while True:
         show_menu()
-        raw = input("\nYour choice: ")
+        try:
+            raw = input("\nYour choice: ")
+        except EOFError:
+            return None
         value = raw.strip().lower()
 
         if value in ("q", "quit", "exit"):
